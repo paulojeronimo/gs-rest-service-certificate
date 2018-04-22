@@ -11,7 +11,7 @@ source $config
 
 mkdir generated
 
-# create the keystore (in PKCS12 format to avoid JDK-8182879 warning)
+# Create the keystore (in PKCS12 format to avoid JDK-8182879 warning)
 keytool -genkey -alias $alias -keyalg RSA -keysize 2048 \
 -storetype pkcs12 \
 -keystore generated/$CN.pfx \
@@ -19,7 +19,7 @@ keytool -genkey -alias $alias -keyalg RSA -keysize 2048 \
 -storepass ${storepass} \
 -keypass ${keypass}
 
-# create the CSR
+# Create the certificate signing request (CSR)
 keytool -certreq -alias $alias -file generated/$CN.csr \
 -keystore generated/$CN.pfx \
 -storepass ${storepass} \
@@ -27,8 +27,8 @@ keytool -certreq -alias $alias -file generated/$CN.csr \
 
 # Useful commands:
 #
-# 1) keytool -list -keystore gs-rest-service.paulojeronimo.com.pfx -storepass gs-rest-service-password
+# $ keytool -list -keystore gs-rest-service.paulojeronimo.com.pfx -storepass gs-rest-service-password
 #
 # problem: even if you specify -storetype pkcs12 when you -list the keystore, the keytool will still display the store as a JKS keystore! ( https://stackoverflow.com/a/43603501 )
 #
-# 2) $ openssl pkcs12 -info -in gs-rest-service.paulojeronimo.com.pfx
+# $ openssl pkcs12 -info -in gs-rest-service.paulojeronimo.com.pfx

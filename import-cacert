@@ -9,6 +9,7 @@ config=config
 [ -r $config ] || config=$config.sample
 source $config
 
+# Import the root ca certificate into keystore
 keytool -import \
 -trustcacerts -alias root \
 -file received-from-ca/$cacert \
@@ -19,4 +20,3 @@ keytool -import \
 # Useful commands:
 #
 # keytool -printcert -file received-from-ca/gs-rest-service.paulojeronimo.com.crt
-

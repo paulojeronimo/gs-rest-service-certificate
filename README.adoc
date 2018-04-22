@@ -1,4 +1,4 @@
-= Sprint Boot REST API scripts
+= Sprint Boot REST API scripts to generate HTTPS certificate
 Paulo Jerônimo <paulojeronimo@gmail.com>; {localdatetime}
 :icons: font
 :toc:

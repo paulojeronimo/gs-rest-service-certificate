@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
+# keystore passwords
 storepass=${storepass:-gs-rest-service-password}
 keypass=${keypass:-$storepass}
 
+# keystore parameters
 alias=gs-rest-service
 O=paulojeronimo.com
 CN=gs-rest-service.${O}
+
+# CA root certificate
 cacert=cacert.pem
 
+# gs-rest-service directory
 gs_rest_service_dir=../gs-rest-service

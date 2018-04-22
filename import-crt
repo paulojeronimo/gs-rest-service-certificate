@@ -9,6 +9,7 @@ config=config
 [ -r $config ] || config=$config.sample
 source $config
 
+# Import the generated certificate into keystore
 keytool -import -alias $alias \
 -file generated/$CN.crt \
 -keystore generated/$CN.pfx \
