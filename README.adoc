@@ -3,3 +3,38 @@ Paulo Jerônimo <paulojeronimo@gmail.com>; {localdatetime}
 :icons: font
 :toc:
 :numbered:
+
+== Generate a certificate signing request (CSR)
+
+To generate a CSR, type:
+
+----
+$ ./generate-csr
+----
+
+The link:generate-csr[] script will generate two files:
+
+----
+$ tree generated
+generated
+|-- gs-rest-service.paulojeronimo.com.csr
+`-- gs-rest-service.paulojeronimo.com.pfx
+----
+
+The file `gs-rest-service.paulojeronimo.com.pfx` is the keystore in `PKCS#12` format.
+
+The file `gs-rest-service.paulojeronimo.com.csr` is the CSR. You must send it to the the certificate authority (CA) in order to receive your certificate (CRT).
+
+See the script link:generated-csr[] for details.
+
+== Install a certificate
+
+After receive the certificate files from your CA, create a directory `received-from-ca` and put theses files into it, like the following example:
+
+----
+$ tree received-from-ca
+----
+
+The CA root certificate (cacert.pem) needs to be installed in the keystore first.
+
+After that, call the script `install-crt`.
