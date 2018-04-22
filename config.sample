@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+storepass=${storepass:-gs-rest-service-password}
+keypass=${keypass:-$storepass}
+
+alias=gs-rest-service
+O=paulojeronimo.com
+CN=gs-rest-service.${O}
+cacert=cacert.pem
+
+gs_rest_service_dir=../gs-rest-service

@@ -1,0 +1,22 @@
+#!/bin/bash
+set +x
+set -e
+
+BASE_DIR=`cd "$(dirname "$0")";pwd`
+cd "$BASE_DIR"
+
+config=config
+[ -r $config ] || config=$config.sample
+source $config
+
+keytool -import \
+-trustcacerts -alias root \
+-file received-from-ca/$cacert \
+-keystore generated/$CN.pfx \
+-storepass ${storepass} \
+-keypass ${keypass}
+
+# Useful commands:
+#
+# keytool -printcert -file received-from-ca/gs-rest-service.paulojeronimo.com.crt
+

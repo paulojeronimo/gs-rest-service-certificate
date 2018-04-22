@@ -1,0 +1,34 @@
+#!/bin/bash
+set +x
+set -e
+
+BASE_DIR=`cd "$(dirname "$0")";pwd`
+cd "$BASE_DIR"
+
+config=config
+[ -r $config ] || config=$config.sample
+source $config
+
+mkdir generated
+
+# create the keystore (in PKCS12 format to avoid JDK-8182879 warning)
+keytool -genkey -alias $alias -keyalg RSA -keysize 2048 \
+-storetype pkcs12 \
+-keystore generated/$CN.pfx \
+-dname "CN=$CN,OU=IT, O=$O, L=, ST=, C=PT" \
+-storepass ${storepass} \
+-keypass ${keypass}
+
+# create the CSR
+keytool -certreq -alias $alias -file generated/$CN.csr \
+-keystore generated/$CN.pfx \
+-storepass ${storepass} \
+-keypass ${keypass}
+
+# Useful commands:
+#
+# 1) keytool -list -keystore gs-rest-service.paulojeronimo.com.pfx -storepass gs-rest-service-password
+#
+# problem: even if you specify -storetype pkcs12 when you -list the keystore, the keytool will still display the store as a JKS keystore! ( https://stackoverflow.com/a/43603501 )
+#
+# 2) $ openssl pkcs12 -info -in gs-rest-service.paulojeronimo.com.pfx
