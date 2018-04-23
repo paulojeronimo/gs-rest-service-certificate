@@ -9,6 +9,7 @@ config=config
 [ -r $config ] || config=$config.sample
 source $config
 
+rm -rf generated
 mkdir generated
 
 # Create the keystore (in PKCS12 format to avoid JDK-8182879 warning)
